@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - E-Learning Platform</title>
+    <style>
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            /* Example: Change layout, font sizes, etc. */
+            /* You can add specific styles here */
+        }
+        :root {
+            /* Define CSS variables for consistent color scheme */
+            --background-color-light: #f0f2f5;
+            --text-color-light: #343a40;
+            --background-color-dark: #343a40;
+            --text-color-dark: #f0f2f5;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color-light); /* Use CSS variable for background color */
+            color: var(--text-color-light); /* Use CSS variable for text color */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+            position: relative; /* Added relative positioning to body */
+            min-height: 100vh; /* Ensure body covers the full viewport height */
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: var(--background-color-dark); /* Dark background color */
+            color: var(--text-color-dark); /* Light text color */
+        }
+
+        /* Added dark mode styles for certain elements */
+        body.dark-mode .course,
+        body.dark-mode .year,
+        body.dark-mode .year:hover {
+            color: var(--background-color-dark); /* Set text color for courses and years in dark mode */
+        }
+
+        header {
+            background-color: #355faa; /* Primary: Rich, deeper blue */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative; /* Added position relative */
+        }
+
+        nav {
+            background-color: #eb730d; /* Secondary: Soft, slightly desaturated green */
+            color: white;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav button {
+            background-color: #eb730d; /* Secondary: Soft, slightly desaturated green */
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Adding transition */
+        }
+
+        nav button:hover {
+            background-color: #C74050; /* Accent: A touch of a bolder, muted red */
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .year-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .year {
+            flex: 0 0 48%;
+            margin-bottom: 30px;
+            cursor: pointer;
+            background-color: #fff; /* White background */
+            padding: 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease; /* Adding transition */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+        }
+
+        .year:hover {
+            background-color: #e9ecef; /* Lighter background on hover */
+        }
+
+        .term {
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .course {
+            border: 1px solid #6c757d;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #fff; /* White background */
+            transition: background-color 0.3s ease; /* Adding transition */
+        }
+
+        .course:hover {
+            background-color: #f8f9fa; /* Slightly darker background on hover */
+        }
+
+        .dashboard {
+            margin-top: 30px;
+        }
+
+        .course-card {
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff; /* White background */
+            width: 100%;
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px; /* Moved to bottom */
+            right: 20px; /* Moved to right */
+            z-index: 999; /* Ensure it's above other content */
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color-light);
+        }
+
+        .dark-mode-toggle.dark-mode {
+            color: var(--text-color-dark);
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease; /* Adding transition */
+        }
+
+        input[type="checkbox"] {
+            visibility: hidden;
+        }
+
+        input[type="checkbox"]:checked + .toggle-switch::before {
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MTI - Courses Page</h1>
+</header>
+
+<nav>
+    <!-- Buttons to switch between course subjects -->
+    <button onclick="showCourses('Computer Science')">Computer Science</button>
+    <button onclick="showCourses('Medicine')">Medicine</button>
+</nav>
+
+<section id="courses-section">
+    <!-- Courses will be dynamically added here -->
+</section>
+
+<!-- Dark mode toggle -->
+<label class="dark-mode-toggle">
+    <span id="mode-label">Dark Mode</span><br>
+    <input type="checkbox" onchange="toggleDarkMode()">
+    <div class="toggle-switch"></div>
+</label>
+
+<script>
+    // Define courses data for Computer Science and Medicine
+    var computerScienceCourses = {
+        "Year 1": {
+            "Semester 1": ["Introduction to Programming", "Linear Algebra I", "English Language I", "Introduction to Computer Science", "Mathematical Analysis I", "Physics"],
+            "Semester 2": ["Mathematical Analysis II", "Structured Programming", "Computer Skills", "Linear Algebra II", "Technical Report Writing", "Applied Electronics"]
+        }
+        // Define other years and semesters for Computer Science
+    };
+
+    var medicineCourses = {
+        "Module 1": {
+            "Semester 1": ["Anatomy", "Physiology", "Biochemistry", "Pathology", "Pharmacology"],
+            "Semester 2": ["Microbiology", "Histology", "Neuroscience", "Immunology", "Medical Genetics"]
+        }
+        // Define other years and semesters for Medicine
+    };
+
+    // Function to display courses based on the selected subject
+    function showCourses(subject) {
+        var coursesSection = document.getElementById('courses-section');
+        coursesSection.innerHTML = ''; // Clear existing courses
+
+        // Determine which set of courses to display based on the selected subject
+        var coursesData = (subject === 'Computer Science') ? computerScienceCourses : medicineCourses;
+
+        // Iterate over years and semesters to display courses
+        Object.keys(coursesData).forEach(function(year) {
+            var yearDiv = document.createElement('div');
+            yearDiv.classList.add('year');
+            yearDiv.innerHTML = '<h3>' + year + '</h3>';
+
+            Object.keys(coursesData[year]).forEach(function(semester) {
+                var semesterDiv = document.createElement('div');
+                semesterDiv.classList.add('term');
+                semesterDiv.innerHTML = '<h4>' + semester + '</h4>';
+
+                // Add courses for the current semester
+                coursesData[year][semester].forEach(function(course) {
+                    var courseDiv = document.createElement('div');
+                    courseDiv.classList.add('course');
+                    courseDiv.textContent = course;
+                    semesterDiv.appendChild(courseDiv);
+                });
+
+                // Toggle display of semester courses on click
+                yearDiv.appendChild(semesterDiv);
+            });
+
+            // Toggle display of term (semester) courses on click
+yearDiv.addEventListener('click', function(event) {
+    event.stopPropagation(); // Prevent click event from bubbling up to the semester div
+    var semesters = this.querySelectorAll('.term');
+    semesters.forEach(function(semester) {
+        semester.style.display = (semester.style.display === 'none') ? 'block' : 'none';
+    });
+});
+
+
+            // Append year with its courses to the courses section
+            coursesSection.appendChild(yearDiv);
+        });
+    }
+
+    // Initially show Computer Science courses
+    showCourses('Computer Science');
+
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode'); // Toggle dark mode class on body
+        const modeLabel = document.getElementById('mode-label');
+        modeLabel.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        modeLabel.style.color = body.classList.contains('dark-mode') ? 'white' : ''; // Set label text color based on dark mode state
+    }
+</script>
+
+</body>
+</html>

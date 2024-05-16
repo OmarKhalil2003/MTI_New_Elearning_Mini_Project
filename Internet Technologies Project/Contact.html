@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - E-Learning Platform</title>
+    <style>
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            /* Example: Change layout, font sizes, etc. */
+            /* You can add specific styles here */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; /* Base: Slightly warmer off-white */
+        }
+
+        body.dark-mode {
+            background-color: #343a40; /* Dark background color */
+            color: #f0f2f5; /* Light text color */
+        }
+
+        header {
+            background-color: #355faa; /* Primary: Rich, deeper blue */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        nav {
+            background-color: #eb730d; /* Secondary: Soft, slightly desaturated green */
+            color: white;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #C74050; /* Accent: A touch of a bolder, muted red */
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff; /* White background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .contact-form button {
+            background-color: #203045; /* Primary: Rich, deeper blue */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #506663; /* Secondary: Soft, slightly desaturated green */
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Style for dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px; /* Moved to bottom */
+            right: 20px; /* Moved to right */
+            z-index: 999; /* Ensure it's above other content */
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color-light);
+        }
+
+        .dark-mode-toggle.dark-mode {
+            color: var(--text-color-dark);
+        }
+
+        .dark-mode h2 {
+            color: #000;
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        input[type="checkbox"] {
+            visibility: hidden;
+        }
+
+        input[type="checkbox"]:checked + .toggle-switch::before {
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MTI - Contact Us Page</h1>
+</header>
+
+<nav>
+    <a href="Home.html">Home</a>
+    <a href="Courses.html">Courses</a>
+    <a href="About.html">About Us</a>
+    <a href="Contact.html">Contact</a>
+</nav>
+
+<section>
+    <div class="contact-form">
+        <!-- Contact Form -->
+        <h2>Contact Us</h2>
+        <form id="contact-form" action="#" method="post">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
+
+        <!-- Success and Error Messages -->
+        <div id="success-message" class="success-message" style="display: none;">Message sent successfully!</div>
+        <div id="error-message" class="error-message" style="display: none;">There was an error sending your message. Please try again later.</div>
+    </div>
+</section>
+
+<!-- Dark mode toggle -->
+<label class="dark-mode-toggle">
+    <span id="mode-label">Dark Mode</span><br>
+    <input type="checkbox" onchange="toggleDarkMode()">
+    <div class="toggle-switch"></div>
+</label>
+
+<script>
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode'); // Toggle dark mode class on body
+        const modeLabel = document.getElementById('mode-label');
+        modeLabel.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        modeLabel.style.color = body.classList.contains('dark-mode') ? 'white' : ''; // Set label text color based on dark mode state
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Form submission via AJAX
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+
+            // AJAX request example
+            // Replace 'your-api-endpoint' with the actual endpoint
+            fetch('your-api-endpoint', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response data
+                console.log(data);
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

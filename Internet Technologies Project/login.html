@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external stylesheet -->
+
+    <!-- Internal styles for dark mode -->
+    <style>
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #343a40; /* Dark background color */
+            color: #f0f2f5; /* Light text color */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Container for the login form -->
+<div class="form-container">
+
+    <!-- Login form -->
+    <form action="connection.php" method="POST">
+        <h3>Sign In</h3> <!-- Title for the form -->
+        <input type="email" name="username" required placeholder="Enter your email"> <!-- Email input field -->
+        <input type="password" name="password" required placeholder="Enter your password"> <!-- Password input field -->
+        <input type="submit" name="submit" value="Sign In" class="form-btn"> <!-- Submit button -->
+    </form>
+
+</div>
+
+<!-- Dark mode toggle -->
+<label class="dark-mode-toggle">
+    <span id="mode-label">Dark Mode</span><br> <!-- Label for the dark mode toggle -->
+    <input type="checkbox" onchange="toggleDarkMode()"> <!-- Checkbox for toggling dark mode -->
+    <div class="toggle-switch"></div> <!-- Slider for visual indication of mode -->
+</label>
+
+<script>
+    // JavaScript function to toggle dark mode
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode'); // Toggle dark mode class on body
+        const modeLabel = document.getElementById('mode-label');
+        modeLabel.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode'; // Update label text
+        modeLabel.style.color = body.classList.contains('dark-mode') ? 'white' : ''; // Set label text color based on dark mode state
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MTI</title>
+    <style>
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            /* Example: Change layout, font sizes, etc. */
+            /* You can add specific styles here */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; /* Base: Slightly warmer off-white */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        body.dark-mode {
+            background-color: #343a40; /* Dark mode background color */
+            color: #fff; /* Adjust text color for better readability */
+        }
+
+        header {
+            background-color: #355faa; /* Primary: Rich, deeper blue */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        nav {
+            background-color: #eb730d; /* Secondary: Soft, slightly desaturated green */
+            color: white;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #C74050; /* Accent: A touch of a bolder, muted red */
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .about-content {
+            text-align: center;
+            margin-top: 20px; /* Added margin for better spacing */
+        }
+
+        .crew-member {
+            cursor: pointer;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid #203045; /* Primary: Rich, deeper blue */
+            border-radius: 5px;
+            background-color: #355faa; /* Secondary: Soft, slightly desaturated green */
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .crew-member:hover {
+            background-color: #eb730d; /* Accent: A touch of a bolder, muted red */
+        }
+
+        .crew-details {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 2px solid #203045; /* Primary: Rich, deeper blue */
+            border-radius: 5px;
+            background-color: #fff; /* White background */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Specific style for h2 in dark mode */
+        body.dark-mode h2 {
+            color: white; /* Set h2 color to white in dark mode */
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px; /* Moved to bottom */
+            right: 20px; /* Moved to right */
+            z-index: 999; /* Ensure it's above other content */
+            text-align: center;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .dark-mode-toggle.dark-mode {
+            color: #fff;
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        input[type="checkbox"] {
+            visibility: hidden;
+        }
+
+        input[type="checkbox"]:checked + .toggle-switch::before {
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MTI - About Us Page</h1>
+</header>
+
+<nav>
+    <a href="Home.html">Home</a>
+    <a href="Courses.html">Courses</a>
+    <a href="About.html">About Us</a>
+    <a href="Contact.html">Contact</a>
+</nav>
+
+<section>
+    <div class="about-content">
+        <h2>Meet The Crew</h2>
+    
+        <!-- Crew Members -->
+        <div class="crew-member" onclick="toggleDetails('refaat')">Omar Refaat</div>
+        <div class="crew-details" id="refaat-details">
+            <p><b>Role:</b> سباك </p>
+            <img src="refaat.png" alt="refaat">
+        </div>
+
+        <div class="crew-member" onclick="toggleDetails('hegazy')">Mohamed Hegazy</div>
+        <div class="crew-details" id="hegazy-details">
+            <p><b>Role:</b> نجار مسلح</p>
+            <img src="hegz.png" alt="hegazy">
+        </div>
+
+        <div class="crew-member" onclick="toggleDetails('osama')">Mohamed Osama</div>
+        <div class="crew-details" id="osama-details">
+            <p><b>Role:</b> صبي دوكمينتيشن 1</p>
+            <img src="osama.png" alt="osama">
+        </div>
+
+        <div class="crew-member" onclick="toggleDetails('ghon')">Mohamed Ghonamey</div>
+        <div class="crew-details" id="ghon-details">
+            <p><b>Role:</b> صبي دوكمينتيشن 2</p>
+            <img src="ghonamey.png" alt="ghonamey">
+        </div>
+
+        <div class="crew-member" onclick="toggleDetails('khalil')">Omar Khalil</div>
+        <div class="crew-details" id="khalil-details">
+            <p><b>Role:</b> نقاش</p>
+            <img src="khalil.png" alt="khalil">
+        </div>
+        
+        <!-- Image of the Crew -->
+        <img src="MeetTheCrew.jpg" alt="Meet The Crew">
+    </div>
+</section>
+
+<!-- Dark mode toggle -->
+<label class="dark-mode-toggle">
+    <span id="mode-label">Dark Mode</span><br>
+    <input type="checkbox" onchange="toggleDarkMode()">
+    <div class="toggle-switch"></div>
+</label>
+
+<script>
+    function toggleDetails(memberId) {
+        var details = document.getElementById(memberId + '-details');
+        var member = document.getElementById(memberId);
+        if (details.style.display === 'block') {
+            details.style.display = 'none';
+            member.style.backgroundColor = '#506663'; /* Secondary: Soft, slightly desaturated green */
+        } else {
+            details.style.display = 'block';
+            member.style.backgroundColor = '#C74050'; /* Accent: A touch of a bolder, muted red */
+        }
+    }
+
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode'); // Toggle dark mode class on body
+        const modeLabel = document.getElementById('mode-label');
+        modeLabel.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        modeLabel.style.color = body.classList.contains('dark-mode') ? '#fff' : ''; // Set label text color based on dark mode state
+    }
+</script>
+
+</body>
+</html>

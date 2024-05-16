@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College - E-Learning Platform</title>
+    <style>
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            /* Example: Change layout, font sizes, etc. */
+            /* You can add specific styles here */
+        }
+        :root {
+            --background-color-light: #f0f2f5;
+            --text-color-light: #343a40;
+            --background-color-dark: #343a40;
+            --text-color-dark: #f0f2f5;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color-light); /* Use CSS variable for background color */
+            color: var(--text-color-light); /* Use CSS variable for text color */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+            position: relative; /* Added relative positioning to body */
+            min-height: 100vh; /* Ensure body covers the full viewport height */
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: var(--background-color-dark); /* Dark background color */
+            color: var(--text-color-dark); /* Light text color */
+        }
+
+        header {
+            background-color: #355faa; /* Primary: Rich, deeper blue */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative; /* Added position relative */
+        }
+
+        nav {
+            background-color: #eb730d; /* Secondary: Soft, slightly desaturated green */
+            color: white;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin-right: 10px;
+            transition: background-color 0.5s ease; /* Increased transition time */
+        }
+
+        nav a:hover {
+            background-color: #eb730d; /* Accent: A touch of a bolder, muted red */
+        }
+
+        section {
+            display: none; /* Initially hide all sections */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dashboard {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .course-card {
+            border-radius: 10px; /* Rounded corners */
+            margin-bottom: 30px; /* Increased margin */
+            padding: 20px; /* Increased padding */
+            background-color: #fff;
+            width: 30%;
+            transition: transform 0.5s ease, box-shadow 0.5s ease; /* Increased transition time */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Softer shadow */
+            background-color: #eb730d; /* Primary color */
+            color: white; /* Change text color to white on hover */
+        }
+
+        @media screen and (max-width: 768px) {
+            .course-card {
+                width: 45%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .course-card {
+                width: 100%;
+            }
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff; /* Changed background color to white */
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adding a shadow for better visibility */
+        }
+        
+        .popup-content {
+            color: #355faa; /* Changed text color to match the header */
+            text-align: center;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        h1 {
+            color: #fff;
+        }
+
+        h2, h3, h4, h5, h6 {
+            color: #343a40;
+        }
+
+        p {
+            color: #6c757d;
+        }
+
+        /* Style for dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px; /* Moved to bottom */
+            right: 20px; /* Moved to right */
+            z-index: 999; /* Ensure it's above other content */
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color-light);
+        }
+
+        .dark-mode-toggle.dark-mode {
+            color: var(--text-color-dark);
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        input[type="checkbox"] {
+            visibility: hidden;
+        }
+
+        input[type="checkbox"]:checked + .toggle-switch::before {
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>College - E-Learning Platform: CS</h1>
+</header>
+
+<nav>
+    <a href="Home.html">Home</a>
+    <a href="Courses.html">Courses</a>
+    <a href="About.html">About Us</a>
+    <a href="Contact.html">Contact</a>
+</nav>
+
+<section id="cs" class="dashboard">
+    <div class="course-card" onclick="showAssignmentDetails('introduction_programming')">
+        <h3>Introduction to Programming</h3>
+        <p>Learn the basics of programming languages.</p>
+        <p>Next Assignment: Due on December 15, 2023</p>
+    </div>
+
+    <div class="course-card" onclick="showAssignmentDetails('data_structures_algorithms')">
+        <h3>Data Structures and Algorithms</h3>
+        <p>Explore fundamental data structures and algorithms.</p>
+        <p>Next Assignment: Due on December 18, 2023</p>
+    </div>
+
+    <div class="course-card" onclick="showAssignmentDetails('computer_networks_i')">
+        <h3>Computer Networks I</h3>
+        <p>Build a foundation in computer networks.</p>
+        <p>Next Assignment: Due on December 20, 2023</p>
+    </div>
+
+    <div class="course-card" onclick="showAssignmentDetails('database_management')">
+        <h3>Database Management</h3>
+        <p>Learn about database design and management.</p>
+        <p>Next Assignment: Due on December 22, 2023</p>
+    </div>
+
+    <div class="course-card" onclick="showAssignmentDetails('software_engineering_i')">
+        <h3>Software Engineering I</h3>
+        <p>Explore the fascinating world of software engineering.</p>
+        <p>Next Assignment: Due on December 25, 2023</p>
+    </div>
+</section>
+
+<!-- Dark mode toggle -->
+<label class="dark-mode-toggle">
+    <span id="mode-label">Dark Mode</span><br>
+    <input type="checkbox" onchange="toggleDarkMode()">
+    <div class="toggle-switch"></div>
+</label>
+
+<!-- Popup window for assignment details -->
+<div id="assignment-popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2 id="popup-title"></h2>
+        <p id="popup-details"></p>
+        <input type="file" id="assignment-file">
+        <button id="submit-btn">Submit Assignment</button>
+    </div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode'); // Toggle dark mode class on body
+        const modeLabel = document.getElementById('mode-label');
+        modeLabel.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        modeLabel.style.color = body.classList.contains('dark-mode') ? 'white' : ''; // Set label text color based on dark mode state
+    }
+
+    function showAssignmentDetails(courseId) {
+        var popup = document.getElementById("assignment-popup");
+        var popupTitle = document.getElementById("popup-title");
+        var popupDetails = document.getElementById("popup-details");
+        var submitButton = document.getElementById("submit-btn");
+        var fileInput = document.getElementById("assignment-file");
+
+        // Populate popup content based on courseId
+        switch (courseId) {
+            case "introduction_programming":
+                popupTitle.textContent = "Introduction to Programming";
+                popupDetails.textContent = "Assignment Details: Learn the basics of programming languages. Next Assignment: Due on December 15, 2023";
+                break;
+            case "data_structures_algorithms":
+                popupTitle.textContent = "Data Structures and Algorithms";
+                popupDetails.textContent = "Assignment Details: Explore fundamental data structures and algorithms. Next Assignment: Due on December 18, 2023";
+                break;
+            case "computer_networks_i":
+                popupTitle.textContent = "Computer Networks I";
+                popupDetails.textContent = "Assignment Details: Build a foundation in computer networks. Next Assignment: Due on December 20, 2023";
+                break;
+            case "database_management":
+                popupTitle.textContent = "Database Management";
+                popupDetails.textContent = "Assignment Details: Learn about database design and management. Next Assignment: Due on December 22, 2023";
+                break;
+            case "software_engineering_i":
+                popupTitle.textContent = "Software Engineering I";
+                popupDetails.textContent = "Assignment Details: Explore the fascinating world of software engineering. Next Assignment: Due on December 25, 2023";
+                break;
+            default:
+                popupTitle.textContent = "Unknown Course";
+                popupDetails.textContent = "Sorry, no assignment details available for this course.";
+                break;
+        }
+
+        // Display the popup
+        popup.style.display = "block";
+
+        // Add event listener to submit button
+        submitButton.addEventListener("click", function() {
+            // Perform submission here
+            var file = fileInput.files[0];
+            if (file) {
+                console.log("File selected:", file.name);
+                // You can perform further actions like sending the file to the server via AJAX
+                // For demonstration purposes, let's just log the file name
+                alert("Assignment submitted: " + file.name);
+                closePopup();
+            } else {
+                alert("Please select a file.");
+            }
+        });
+    }
+
+    function closePopup() {
+        var popup = document.getElementById("assignment-popup");
+        popup.style.display = "none";
+        // Remove event listener to prevent multiple submissions
+        var submitButton = document.getElementById("submit-btn");
+        submitButton.removeEventListener("click", submitAssignment);
+    }
+</script>
+
+</body>
+</html>
